@@ -22,7 +22,7 @@ public class Lobby : MonoBehaviourPunCallbacks
     private void Start()
     {
         unMenu.SetActive(true);
-        Screen.SetResolution(800, 600, false);
+       //Screen.SetResolution(1024, 768, false);
 
     }
 

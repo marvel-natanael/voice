@@ -8,7 +8,7 @@ public class soundMove : MonoBehaviour
 {
     // Start is called before the first frame update
     public float sensitivity = 100;
-    public float loudness = 5;
+    public float loudness = 0;
     public PhotonView photonView;
     public TextMeshProUGUI score;
     public TextMeshProUGUI uName;
@@ -20,13 +20,14 @@ public class soundMove : MonoBehaviour
     public Transform ground;
 
     private AudioSource audioInput;
+    public GameObject micVolume;
     private bool canMove;
     private SpriteRenderer sr;
     private void Awake()
     {
         turnClass.player = gameObject;
 
-        if(photonView.IsMine)
+        if (photonView.IsMine)
         {
             pCamera.SetActive(true);
             uName.text = PhotonNetwork.NickName;
@@ -36,6 +37,10 @@ public class soundMove : MonoBehaviour
             pCamera.SetActive(false);
             uName.text = photonView.Owner.NickName;
             uName.color = Color.red;
+        }
+        foreach (var device in Microphone.devices)
+        {
+            Debug.Log("Name : " + device);
         }
     }
 
@@ -50,9 +55,8 @@ public class soundMove : MonoBehaviour
         audioInput.loop = true;
         audioInput.mute = false;
 
-        while(!(Microphone.GetPosition(null) > 0)){}
+        while (!(Microphone.GetPosition(null) > 0)) { }
         audioInput.Play();
-
     }
 
     IEnumerator waitLobby()
@@ -84,7 +88,6 @@ public class soundMove : MonoBehaviour
             photonView.RPC("isUp", RpcTarget.AllBuffered);
             //isUp();
         }
-
     }
 
     float getVolume()
@@ -92,7 +95,7 @@ public class soundMove : MonoBehaviour
         float[] data = new float[256];
         float a = 0;
         audioInput.GetOutputData(data, 0);
-        foreach(float s in data)
+        foreach (float s in data)
         {
             a += Mathf.Abs(s);
         }
@@ -101,14 +104,14 @@ public class soundMove : MonoBehaviour
 
     void movePlayer()
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 4);
-        
-        /*loudness = getVolume() * sensitivity;
+        //GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 4);
+
+        loudness = getVolume() * sensitivity;
         if (loudness > 8)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 4);
         }
-        */
+
     }
 
     public float getScore()
@@ -149,6 +152,7 @@ public class soundMove : MonoBehaviour
         isTurn = false;
         turnClass.isTurn = isTurn;
         turnClass.wasPrev = true;
+        Destroy(gameObject);
     }
 
     [PunRPC]
@@ -164,6 +168,22 @@ public class soundMove : MonoBehaviour
     }
 
     [PunRPC]
+    private void onSpawned()
+    {
+        audioInput = GetComponent<AudioSource>();
+        audioInput.clip = Microphone.Start(null, true, 10, 44100);
+
+        sr = GetComponent<SpriteRenderer>();
+        turnSystem = GameObject.Find("TurnSystem").GetComponent<TurnSystem>();
+
+        audioInput.loop = true;
+        audioInput.mute = false;
+
+        while (!(Microphone.GetPosition(null) > 0)) { }
+        audioInput.Play();
+    }
+
+    [PunRPC]
     private void isUp()
     {
         if (isTurn)
@@ -175,7 +195,7 @@ public class soundMove : MonoBehaviour
             {
                 movePlayer();
                 //photonView.RPC("turnNow", RpcTarget.AllBuffered);
-                sr.color = new Color(1, 1, 0, 1); 
+                sr.color = new Color(1, 1, 0, 1);
             }
             score.text = "Score\n" + (getScore().ToString("0"));
             turnClass.score = getScore();

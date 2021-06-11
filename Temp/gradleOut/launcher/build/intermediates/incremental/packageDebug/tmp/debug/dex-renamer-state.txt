@@ -1,0 +1,4 @@
+#Fri Jun 11 20:49:04 ICT 2021
+base.0=D\:\\j\\REVISI\\REVISI\\2025\\Temp\\gradleOut\\launcher\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex

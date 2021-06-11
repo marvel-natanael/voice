@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: 100
-  loudness: 5
+  loudness: 0
   photonView: {fileID: 3632795839566876997}
   score: {fileID: 6199701376300365525}
   uName: {fileID: 7258593820407597359}
@@ -163,6 +163,7 @@ MonoBehaviour:
     score: 0
   isTurn: 0
   ground: {fileID: 0}
+  micVolume: {fileID: 0}
 --- !u!82 &4231330239829138123
 AudioSource:
   m_ObjectHideFlags: 0
@@ -519,7 +520,7 @@ Camera:
   far clip plane: 1000
   field of view: 9.799999
   orthographic: 1
-  orthographic size: 2.5860064
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

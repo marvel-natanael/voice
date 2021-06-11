@@ -51,6 +51,7 @@ public class TurnSystem : MonoBehaviour
     {
         for (int i=0; i< players.Count; i++)
         {
+            highScore[i] = players[i].score;
             if (!players[i].wasPrev)
             {
                 players[i].isTurn = true;
@@ -61,9 +62,8 @@ public class TurnSystem : MonoBehaviour
                 players[i].wasPrev)
             {
                 resetTurn();
+                compareScore();
             }
-            highScore[i] = players[i].score;
-            compareScore();
         }
     }
 

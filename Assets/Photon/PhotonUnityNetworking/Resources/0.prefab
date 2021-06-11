@@ -482,7 +482,7 @@ Camera:
   far clip plane: 1000
   field of view: 9.799999
   orthographic: 1
-  orthographic size: 2.5860064
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -510,10 +510,10 @@ GameObject:
   - component: {fileID: 2905820332307379948}
   - component: {fileID: 2905820332307379947}
   - component: {fileID: 2905820332307379946}
-  - component: {fileID: 2905820332307379945}
   - component: {fileID: 2905820332307379944}
   - component: {fileID: 2905820332307379959}
   - component: {fileID: 2905820332307379958}
+  - component: {fileID: 5616472208962947136}
   m_Layer: 0
   m_Name: 0
   m_TagString: Player
@@ -577,7 +577,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 871a41dbde8c87b4d961af31c003b4c4, type: 3}
-  m_Color: {r: 1, g: 0.49897224, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.85292053, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -634,31 +634,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2905820332307379945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2905820332307379957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c36a596787ff5d4788d969b9cfb8f41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensitivity: 100
-  loudness: 5
-  photonView: {fileID: 2905820332307379959}
-  score: {fileID: 2905820331296481442}
-  uName: {fileID: 2905820331310529387}
-  pCamera: {fileID: 2905820332091580820}
-  moveButton: {fileID: 6934808528137934299}
-  turnSystem: {fileID: 0}
-  turnClass:
-    player: {fileID: 2905820332307379957}
-    wasPrev: 0
-    isTurn: 0
-  isTurn: 0
 --- !u!82 &2905820332307379944
 AudioSource:
   m_ObjectHideFlags: 0
@@ -668,7 +643,7 @@ AudioSource:
   m_GameObject: {fileID: 2905820332307379957}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 3654683571175328125, guid: 1b9216566961bf64b9a59c40af7f7480,
+  OutputAudioMixerGroup: {fileID: -7880098593679333971, guid: 1b9216566961bf64b9a59c40af7f7480,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
@@ -795,6 +770,33 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &5616472208962947136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2905820332307379957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c36a596787ff5d4788d969b9cfb8f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensitivity: 100
+  loudness: 0
+  photonView: {fileID: 2905820332307379959}
+  score: {fileID: 2905820331296481442}
+  uName: {fileID: 2905820331310529387}
+  pCamera: {fileID: 2905820332091580820}
+  moveButton: {fileID: 6934808528137934299}
+  turnSystem: {fileID: 0}
+  turnClass:
+    player: {fileID: 0}
+    wasPrev: 0
+    isTurn: 0
+    score: 0
+  isTurn: 0
+  ground: {fileID: 0}
 --- !u!1 &2917175177007606576
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,7 +933,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2905820332307379945}
+        - m_Target: {fileID: 0}
           m_MethodName: onRelease
           m_Mode: 1
           m_Arguments:
@@ -946,7 +948,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2905820332307379945}
+        - m_Target: {fileID: 0}
           m_MethodName: onPress
           m_Mode: 1
           m_Arguments:
